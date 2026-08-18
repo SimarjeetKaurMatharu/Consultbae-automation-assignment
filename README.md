@@ -116,4 +116,4 @@ While working on the data, I found several problems in the three CSV files and t
 ---
 
 ## 📈 Task 5: Stretch Plan (Weekend Scale)
-
+* If 5,000 workers open the app at the same time, the server might crash because a small local system cannot handle all those big audio files hitting it at once. To fix this, we should send the recordings directly to a giant cloud bucket like AWS S3 instead of saving them on our small server. Also, the database will definitely lock up and freeze if everyone tries to save their details at the exact same second. We can resolve this database traffic jam by setting up a queue system, which acts like a neat waiting line to process entries one by one. Finally, because many workers have bad phone internet, their uploads will probably break halfway through. To prevent them from losing their progress and starting over, we must use a smart resume feature that saves the uploaded data chunks and continues right from where it stopped.
