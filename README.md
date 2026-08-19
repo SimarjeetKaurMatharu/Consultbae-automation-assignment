@@ -97,19 +97,19 @@ While working on the data, I found several problems in the three CSV files and t
 
 ### Challenge 1: The Email Node sent separate emails for every candidate instead of one list.
 * **Where I got stuck:** After filtering candidates down to the final eligible records, n8n looped through the rows and tried to send a separate email for every single person, which would spam the inbox.
-* **What I searched / asked AI:** *"How to combine multiple rows into one email in n8n"*, *"n8n loop running email node multiple times"*
-* **Suggestions I rejected and why:** AI suggested using a complex Code Node with custom JavaScript to write a `for` loop. I rejected this because the assignment strictly stated pure-code automation solutions score zero. I wanted to use native, no-code features.
+* **What I searched:** *"How to combine multiple rows into one email in n8n"*, *"n8n loop running email node multiple times"*
+* **Suggestions I rejected and why:** I got suggested using a complex Code Node with custom JavaScript to write a `for` loop. I rejected this because the assignment strictly stated pure-code automation solutions score zero. I wanted to use native, no-code features.
 * **How I got unstuck:** I discovered the **Item Lists Node** (using the Aggregate feature). I placed it right before the Email Node to group all individual candidate rows into a single list object. This forced n8n to send exactly one email containing the full list.
 
 ### Challenge 2: Date formats randomly broke and turned into weird numbers.
 * **Where I got stuck:** The dates in the source files changed into raw numbers like `46227` during processing, which completely broke my database sorting.
-* **What I searched / asked AI:** *"Dates turning into 5 digit numbers in excel csv processing"*, *"convert excel serial date number to standard date"*
+* **What I searched:** *"Dates turning into 5 digit numbers in excel csv processing"*, *"convert excel serial date number to standard date"*
 * **Suggestions I rejected and why:** I saw suggestions telling me to manually re-format the source CSV files in Excel. I rejected this because a real pipeline must handle raw, imperfect data automatically without human intervention.
 * **How I got unstuck:** I realized Excel stores dates internally as serial integers. I added a conversion check directly into my script to automatically parse these numbers back into readable dates before saving them to the database.
 
 ### Challenge 3: n8n Sort Node gave a "Couldn't find the field" error for data I could clearly see.
 * **Where I got stuck:** The Sort Node threw an error saying `Projects Completed` did not exist, even though it was clearly in the table preview.
-* **What I searched / asked AI:** *"n8n sort node error field not found visual data exists"*, *"schema drift in n8n nodes"*
+* **What I searched:** *"n8n sort node error field not found visual data exists"*, *"schema drift in n8n nodes"*
 * **Suggestions I rejected and why:** A forum post suggested deleting the node and recreating the whole workflow. I rejected this because it didn't solve the underlying problem and wasn't a reliable fix.
 * **How I got unstuck:** I opened the expressions panel, manually re-mapped the incoming JSON path for `Projects Completed`, and forced the node to refresh its input data schema, which solved the error instantly.
 
